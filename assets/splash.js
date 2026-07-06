@@ -23,6 +23,7 @@ function initSplash() {
   const bubble = document.getElementById('sp-bubble');
   const card = document.getElementById('sp-card');
   const closeX = document.getElementById('sp-close');
+  const cardLink = card ? card.querySelector('.sp-go') : null;
   if (!cover || !bubble || !card) return;
 
   const vendors = window.SITE_CONTENT && window.SITE_CONTENT.vendors;
@@ -66,11 +67,27 @@ function initSplash() {
   let x = 40, y = window.innerHeight * 0.3;
   let vx = 0.4, vy = 0.24, t = 0;
   let wandering = true;
+  let cardOpen = false;
   let mouseX = -999, mouseY = -999;
   const CATCH_RADIUS = 95, SURRENDER_MS = 600;
   let nearMs = 0, lastT = performance.now(), tired = false;
+  let dismissTimer = null;
 
   document.addEventListener('mousemove', (e) => { mouseX = e.clientX; mouseY = e.clientY; });
+
+  function clearDismissTimer() {
+    if (!dismissTimer) return;
+    clearTimeout(dismissTimer);
+    dismissTimer = null;
+  }
+
+  function scheduleDismiss() {
+    clearDismissTimer();
+    dismissTimer = setTimeout(() => {
+      if (!cardOpen) return;
+      dismiss();
+    }, 1200);
+  }
 
   function step(now) {
     const dt = Math.min(50, now - lastT); lastT = now;
@@ -102,13 +119,31 @@ function initSplash() {
   bubble.addEventListener('click', () => {
     if (!released) return;
     wandering = false;
+    cardOpen = true;
+    clearDismissTimer();
     const r = bubble.getBoundingClientRect();
     let cy = r.top - 210; if (cy < 20) cy = r.bottom + 12;
     card.style.left = Math.min(r.left, window.innerWidth - 280) + 'px';
     card.style.top = cy + 'px';
     card.classList.add('show'); bubble.style.opacity = '.25';
   });
-  function dismiss() { card.classList.remove('show'); card.style.transform = 'scale(0)'; bubble.style.opacity = '1'; wandering = true; }
+  function dismiss() {
+    clearDismissTimer();
+    cardOpen = false;
+    card.classList.remove('show');
+    card.style.transform = 'scale(0)';
+    bubble.style.opacity = '1';
+    wandering = true;
+  }
   closeX.addEventListener('click', dismiss);
   card.addEventListener('click', (e) => { if (e.target === card) dismiss(); });
+  bubble.addEventListener('mouseleave', () => { if (cardOpen) scheduleDismiss(); });
+  bubble.addEventListener('mouseenter', clearDismissTimer);
+  card.addEventListener('mouseleave', scheduleDismiss);
+  card.addEventListener('mouseenter', clearDismissTimer);
+  if (cardLink) {
+    cardLink.addEventListener('click', () => {
+      dismiss();
+    });
+  }
 }
