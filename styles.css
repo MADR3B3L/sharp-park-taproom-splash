@@ -637,17 +637,18 @@ p { margin: 0 0 16px; }
     width: 100%;
     justify-content: flex-start;
     order: 3;
+    gap: 8px;
   }
 
   .logo {
-    font-size: 17px;
+    font-size: 19px;
     gap: 8px;
     flex: 1 1 auto;
     min-width: 0;
   }
 
   .logo-mark {
-    height: 34px;
+    height: 40px;
   }
 
   .btn {
@@ -658,6 +659,9 @@ p { margin: 0 0 16px; }
   .btn-small {
     width: auto;
     flex: 0 0 auto;
+    padding: 6px 12px;
+    font-size: 11px;
+    min-height: 34px;
   }
 
   .hero {
