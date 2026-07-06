@@ -83,15 +83,18 @@ let vendorRows = [];
 function fillWordsForm() {
   document.querySelectorAll('#words-card [data-field], #colors-card [data-field], #calendar-card [data-field], #vendors-card [data-field]').forEach((el) => {
     const value = resolvePath(content, el.getAttribute('data-field'));
+    if (el.type === 'checkbox') {
+      el.checked = value == null ? false : !!value;
+      return;
+    }
     if (value == null) return;
-    if (el.type === 'checkbox') el.checked = !!value;
-    else el.value = value;
+    el.value = value;
   });
 }
 
 function readWordsForm() {
   document.querySelectorAll('#words-card [data-field], #colors-card [data-field], #calendar-card [data-field], #vendors-card [data-field]').forEach((el) => {
-    setPath(content, el.getAttribute('data-field'), el.value);
+    setPath(content, el.getAttribute('data-field'), el.type === 'checkbox' ? el.checked : el.value);
   });
 }
 
@@ -191,8 +194,8 @@ document.querySelectorAll('[data-save]').forEach((btn) => {
       result = await saveFile('taps-data.js', js);
     }
     statusEl.textContent = {
-      saved: 'Saved ✓ — refresh the site to see it.',
-      downloaded: 'Downloaded — drop it into the assets folder to replace the old one.',
+      saved: 'Saved ✓ Refresh the live site tab to confirm the change.',
+      downloaded: 'Downloaded ✓ Replace the old file with this one, then refresh the live site.',
       cancelled: '',
       error: 'Something went wrong — nothing was overwritten.',
     }[result];

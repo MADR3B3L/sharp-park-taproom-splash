@@ -17,6 +17,8 @@ window.SITE_CONTENT = {
   "vendors": {
     "lede": "Want to pop up at Sharp Park Taproom? Soon you'll be able to request an open date right from here — it'll drop straight onto our calendar for approval.",
     "spotlightCount": 3,
+    "bubbleEnabled": true,
+    "bubbleNote": "featured today",
     "partners": [
       { "name": "Chido's Pizza", "cuisine": "Pizza", "photoUrl": "", "active": "yes" },
       { "name": "Mezclá Eats", "cuisine": "", "photoUrl": "", "active": "yes" },

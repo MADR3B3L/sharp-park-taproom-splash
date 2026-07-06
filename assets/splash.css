@@ -110,3 +110,36 @@
   background: var(--yellow); color: var(--black); font-weight: 700; font-size: 13px; text-decoration: none;
 }
 .sp-card .sp-x { position: absolute; top: 12px; right: 14px; font-size: 18px; color: #b9c2c7; cursor: pointer; }
+
+@media (max-width: 640px) {
+  .cover {
+    padding: 24px;
+  }
+
+  .cover-logo {
+    width: 88px;
+    height: 88px;
+    margin-bottom: 14px;
+  }
+
+  .cover .sub {
+    font-size: 13px;
+    max-width: 280px;
+  }
+
+  .sp-bubble {
+    max-width: calc(100vw - 24px);
+    padding-right: 16px;
+  }
+
+  .sp-bubble .sp-txt b,
+  .sp-bubble .sp-txt small {
+    max-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .sp-card {
+    width: min(260px, calc(100vw - 24px));
+  }
+}

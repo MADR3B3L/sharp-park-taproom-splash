@@ -22,15 +22,17 @@ function initSplash() {
   const closeX = document.getElementById('sp-close');
   if (!cover || !bubble || !card) return;
 
+  const vendors = window.SITE_CONTENT && window.SITE_CONTENT.vendors;
+  const bubbleEnabled = vendors ? vendors.bubbleEnabled !== false : true;
   const vendor = pickFeaturedVendor();
   const bubbleName = document.getElementById('sp-bubble-name');
   const bubbleNote = document.getElementById('sp-bubble-note');
   const cardName = document.getElementById('sp-card-name');
   const cardNote = document.getElementById('sp-card-note');
-  if (vendor) {
+  if (bubbleEnabled && vendor) {
     const label = vendor.cuisine ? `${vendor.name}` : vendor.name;
     if (bubbleName) bubbleName.textContent = label;
-    if (bubbleNote) bubbleNote.textContent = 'featured today';
+    if (bubbleNote) bubbleNote.textContent = (vendors && vendors.bubbleNote) || 'featured today';
     if (cardName) cardName.textContent = vendor.name;
     if (cardNote) cardNote.textContent = vendor.cuisine
       ? `${vendor.cuisine} — one of today's featured pop-ups. Once the live calendar's connected, this'll show exactly who's on site right now.`
@@ -44,12 +46,13 @@ function initSplash() {
 
   let released = false;
   setTimeout(() => {
-    cover.classList.add('disperse');
-    setTimeout(() => {
-      cover.style.display = 'none';
-      x = (window.innerWidth - bubble.offsetWidth) / 2;
-      y = 130;
-      bubble.style.left = x + 'px';
+      cover.classList.add('disperse');
+      setTimeout(() => {
+        cover.style.display = 'none';
+        if (!bubbleEnabled || !vendor) return;
+        x = (window.innerWidth - bubble.offsetWidth) / 2;
+        y = 130;
+        bubble.style.left = x + 'px';
       bubble.style.top = y + 'px';
       bubble.classList.add('in');
       released = true;

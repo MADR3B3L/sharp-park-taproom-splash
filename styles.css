@@ -574,3 +574,86 @@ p { margin: 0 0 16px; }
   .main-nav { display: none; }
   .hero-logo { display: none; }
 }
+
+@media (max-width: 640px) {
+  .wrap {
+    padding: 0 18px;
+  }
+
+  .header-inner {
+    gap: 12px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+
+  .logo {
+    font-size: 17px;
+    gap: 8px;
+  }
+
+  .logo-mark {
+    height: 34px;
+  }
+
+  .btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .btn-small {
+    width: auto;
+  }
+
+  .hero {
+    padding-top: 64px;
+    padding-bottom: 92px;
+  }
+
+  .hero h1 {
+    font-size: 34px;
+    line-height: 1.05;
+  }
+
+  .hero-sub,
+  .section-lede,
+  .visit-address {
+    font-size: 16px;
+  }
+
+  .hero-actions {
+    gap: 12px;
+  }
+
+  .section {
+    padding: 56px 0;
+  }
+
+  .today-card,
+  .figure-card,
+  .tap-card {
+    padding: 18px;
+  }
+
+  .tap-grid,
+  .about-figures {
+    grid-template-columns: 1fr;
+  }
+
+  .calendar-frame-placeholder {
+    height: 180px;
+  }
+
+  .hours-list {
+    max-width: none;
+  }
+
+  .footer-inner,
+  .footer-links {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .footer-links {
+    gap: 12px;
+  }
+}

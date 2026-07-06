@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Site Options — Sharp Park Taproom</title>
+<title>Sharp Park Taproom Dashboard</title>
 <link rel="icon" type="image/png" href="assets/favicon-official.png">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="site-options.css">
@@ -11,23 +11,63 @@
 <body>
 
 <header class="opt-header">
-  <img src="assets/logo/sharp-park-taproom-logo-official.png" alt="" class="opt-logo">
-  <div>
-    <h1>Site Options</h1>
-    <p>Change the words, colors, and beer list here — no code needed. Nothing saves until you click a Save button.</p>
+  <div class="opt-brand">
+    <img src="assets/logo/sharp-park-taproom-logo-official.png" alt="" class="opt-logo">
+    <div>
+      <p class="opt-kicker">Owner Dashboard</p>
+      <h1>Sharp Park Taproom</h1>
+      <p class="opt-subtitle">Update the live site, taps, colors, and vendor highlights without touching code.</p>
+    </div>
+  </div>
+  <div class="opt-header-actions">
+    <a class="header-link" href="index.html" target="_blank" rel="noopener">Open live site</a>
+    <a class="header-link" href="menu.html" target="_blank" rel="noopener">Open menu page</a>
   </div>
 </header>
 
-<main class="opt-main">
+<main class="opt-main" id="top">
 
-  <section class="opt-card" id="words-card">
-    <h2>Words</h2>
+  <section class="opt-overview">
+    <article class="overview-card">
+      <h2>How this works</h2>
+      <p>Make changes here, then click a yellow save button. If your browser supports direct saving, the update writes straight back to the site data. If not, the dashboard downloads the updated file for you to replace.</p>
+    </article>
+    <article class="overview-card">
+      <h2>Best everyday workflow</h2>
+      <ol class="overview-steps">
+        <li>Open the live site in a second tab.</li>
+        <li>Make a small change here.</li>
+        <li>Save it.</li>
+        <li>Refresh the live site to confirm it looks right.</li>
+      </ol>
+    </article>
+    <article class="overview-card overview-card-accent">
+      <h2>Good to know</h2>
+      <p>Words, taps, colors, vendor chips, and the floating vendor bubble are owner-editable. Bigger layout changes, photo galleries, or new sections can still be added later without breaking this dashboard.</p>
+    </article>
+  </section>
 
-    <label>Header tagline (top of homepage)
-      <input type="text" data-field="hero.eyebrow">
+  <nav class="opt-jumpnav" aria-label="Dashboard sections">
+    <a href="#site-story">Site story</a>
+    <a href="#site-colors">Colors</a>
+    <a href="#calendar-vendors">Calendar & vendors</a>
+    <a href="#beer-list">Beer list</a>
+  </nav>
+
+  <section class="opt-card" id="site-story">
+    <div class="section-head">
+      <div>
+        <p class="section-kicker">Words</p>
+        <h2>Homepage story</h2>
+      </div>
+      <p class="section-note">These fields control the main language people see when they land on the site.</p>
+    </div>
+
+    <label>Header tagline
+      <input type="text" data-field="hero.eyebrow" placeholder="Sharp Park · Pacifica, CA">
     </label>
 
-    <label>Big headline — 3 short lines
+    <label>Main headline — 3 lines
       <div class="line-group">
         <input type="text" data-field="hero.title.0" placeholder="Line 1">
         <input type="text" data-field="hero.title.1" placeholder="Line 2">
@@ -39,19 +79,19 @@
       <textarea data-field="hero.sub" rows="3"></textarea>
     </label>
 
-    <label>"Our story" paragraph
+    <label>Our story
       <textarea data-field="about.body" rows="5"></textarea>
     </label>
 
-    <label>Food truck operational note (under "Usual weekly rhythm")
+    <label>Food pop-up note
       <textarea data-field="today.operationalNote" rows="2"></textarea>
     </label>
 
-    <label>"Food vendors & trucks" coming-soon message
+    <label>Vendor section message
       <textarea data-field="vendors.lede" rows="3"></textarea>
     </label>
 
-    <h3>The four stat cards</h3>
+    <h3>Highlight cards</h3>
     <div class="figures-grid">
       <div class="figure-row"><input type="text" data-field="figures.0.value" placeholder="Value"><input type="text" data-field="figures.0.label" placeholder="Label"></div>
       <div class="figure-row"><input type="text" data-field="figures.1.value" placeholder="Value"><input type="text" data-field="figures.1.label" placeholder="Label"></div>
@@ -80,40 +120,69 @@
     </label>
 
     <div class="save-row">
-      <button class="save-btn" data-save="words">Save words &amp; colors</button>
+      <button class="save-btn" data-save="words">Save site story</button>
       <span class="save-status" id="words-status"></span>
     </div>
-  </section>
-
-  <section class="opt-card" id="colors-card">
-    <h2>Colors</h2>
-    <p class="opt-hint">These three are the site's brand colors. Everything else (backgrounds, text) stays as designed.</p>
-    <label class="color-row">Main blue (header links, headings)
-      <input type="color" data-field="colors.oceanDeep">
-    </label>
-    <label class="color-row">Yellow (buttons, tap numbers)
-      <input type="color" data-field="colors.yellow">
-    </label>
-    <label class="color-row">Wood brown (accents)
-      <input type="color" data-field="colors.wood">
-    </label>
-  </section>
-
-  <section class="opt-card" id="calendar-card">
-    <h2>Food truck calendar</h2>
-    <p class="opt-hint">Paste your Google Calendar's embed link here and it'll show live on the "Today's Food" section. Leave blank to keep the placeholder. In Google Calendar: Settings → pick your calendar → "Integrate calendar" → copy the "Embed code" and paste just the URL inside its <code>src="..."</code> part.</p>
-    <label>Calendar embed link
-      <input type="url" data-field="calendar.embedUrl" placeholder="https://calendar.google.com/calendar/embed?src=...">
-    </label>
-    <div class="save-row">
-      <button class="save-btn" data-save="words">Save words, colors &amp; calendar</button>
-      <span class="save-status" id="words-status-2"></span>
+    <div class="section-footer-nav">
+      <a href="#top">Back to top</a>
+      <a href="#site-colors">Next: Colors</a>
     </div>
   </section>
 
-  <section class="opt-card" id="vendors-card">
-    <h2>Featured vendors</h2>
-    <p class="opt-hint">A random 3 of these show as chips on the homepage, and it changes once a day — not every refresh. Uncheck "On" to hide one without deleting it. Photo is optional for now (paste a link once you have photos hosted somewhere); until then it just shows the vendor's initial.</p>
+  <section class="opt-card" id="site-colors">
+    <div class="section-head">
+      <div>
+        <p class="section-kicker">Brand</p>
+        <h2>Colors</h2>
+      </div>
+      <p class="section-note">These control the main look and feel without changing the layout.</p>
+    </div>
+
+    <label class="color-row">Main blue
+      <input type="color" data-field="colors.oceanDeep">
+    </label>
+    <label class="color-row">Taproom yellow
+      <input type="color" data-field="colors.yellow">
+    </label>
+    <label class="color-row">Wood brown
+      <input type="color" data-field="colors.wood">
+    </label>
+
+    <div class="save-row">
+      <button class="save-btn" data-save="words">Save colors</button>
+      <span class="save-status"></span>
+    </div>
+    <div class="section-footer-nav">
+      <a href="#top">Back to top</a>
+      <a href="#calendar-vendors">Next: Calendar & vendors</a>
+    </div>
+  </section>
+
+  <section class="opt-card" id="calendar-vendors">
+    <div class="section-head">
+      <div>
+        <p class="section-kicker">Live sections</p>
+        <h2>Calendar & vendor highlights</h2>
+      </div>
+      <p class="section-note">Use this area to control what feels live on the site and keep it truthful.</p>
+    </div>
+
+    <label>Google Calendar embed link
+      <input type="url" data-field="calendar.embedUrl" placeholder="https://calendar.google.com/calendar/embed?src=...">
+    </label>
+    <p class="opt-hint">Paste only the calendar embed URL. If this stays blank, the site keeps its placeholder instead of showing bad information.</p>
+
+    <label class="toggle-row">
+      <span>Show the floating vendor bubble on the site</span>
+      <input type="checkbox" data-field="vendors.bubbleEnabled">
+    </label>
+
+    <label>Bubble label
+      <input type="text" data-field="vendors.bubbleNote" placeholder="featured today">
+    </label>
+
+    <p class="opt-hint">If the bubble is not fully truthful yet, turn it off here. Vendor chips can still stay on the homepage.</p>
+
     <div class="beer-table" id="vendor-table">
       <div class="beer-head vendor-head">
         <span>On</span><span>Name</span><span>Cuisine</span><span>Photo URL</span><span></span>
@@ -121,18 +190,30 @@
       <div id="vendor-rows"></div>
     </div>
     <button class="add-btn" id="add-vendor">+ Add a vendor</button>
-    <label style="margin-top:14px">How many to show at once
-      <input type="number" min="1" max="10" data-field="vendors.spotlightCount" style="width:60px">
+
+    <label class="compact-field">How many vendor chips should show at once
+      <input type="number" min="1" max="10" data-field="vendors.spotlightCount">
     </label>
+
     <div class="save-row">
-      <button class="save-btn" data-save="words">Save vendors</button>
-      <span class="save-status"></span>
+      <button class="save-btn" data-save="words">Save calendar & vendors</button>
+      <span class="save-status" id="calendar-vendors-status"></span>
+    </div>
+    <div class="section-footer-nav">
+      <a href="#top">Back to top</a>
+      <a href="#beer-list">Next: Beer list</a>
     </div>
   </section>
 
-  <section class="opt-card" id="beers-card">
-    <h2>Beer list</h2>
-    <p class="opt-hint">This is the same list that shows on the website and prints as the bar menu. Uncheck "On" to pull a beer without deleting it.</p>
+  <section class="opt-card" id="beer-list">
+    <div class="section-head">
+      <div>
+        <p class="section-kicker">Daily operations</p>
+        <h2>Beer list</h2>
+      </div>
+      <p class="section-note">This same list powers the website and the menu page, so one update changes both.</p>
+    </div>
+
     <div class="beer-table" id="beer-table">
       <div class="beer-head">
         <span>On</span><span>Beer</span><span>Brewery</span><span>Style</span><span>ABV%</span><span></span>
@@ -140,10 +221,15 @@
       <div id="beer-rows"></div>
     </div>
     <button class="add-btn" id="add-beer">+ Add a tap</button>
+
     <div class="save-row">
       <button class="save-btn" data-save="beers">Save beer list</button>
-      <button class="link-btn" id="export-csv">Export as .csv (for Google Sheets later)</button>
+      <button class="link-btn" id="export-csv">Export as .csv</button>
       <span class="save-status" id="beers-status"></span>
+    </div>
+    <div class="section-footer-nav">
+      <a href="#top">Back to top</a>
+      <a href="#site-story">Back to site story</a>
     </div>
   </section>
 
