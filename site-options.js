@@ -111,6 +111,67 @@ function refreshLiveModeStatus() {
   updateLiveModeStatus(`Live API found at ${live.getApiBase()}, but this browser still needs the owner access code.`);
 }
 
+function setSectionCollapsed(section, collapsed) {
+  section.classList.toggle('is-collapsed', collapsed);
+  const button = section.querySelector('.section-toggle');
+  if (button) {
+    button.textContent = collapsed ? 'Open section' : 'Collapse section';
+    button.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+  }
+}
+
+function setupCollapsibleSections() {
+  const sections = Array.from(document.querySelectorAll('.opt-card[data-collapsible="true"]'));
+  sections.forEach((section) => {
+    const head = section.querySelector('.section-head');
+    const kicker = head ? head.querySelector('.section-kicker') : null;
+    const title = head ? head.querySelector('h2') : null;
+    const note = head ? head.querySelector('.section-note') : null;
+    if (!head || !kicker || !title) return;
+
+    const main = document.createElement('div');
+    main.className = 'section-head-main';
+
+    const left = document.createElement('div');
+    left.appendChild(kicker);
+    left.appendChild(title);
+
+    main.appendChild(left);
+    if (note) {
+      main.appendChild(note);
+    }
+
+    const toggle = document.createElement('button');
+    toggle.type = 'button';
+    toggle.className = 'section-toggle';
+    toggle.addEventListener('click', () => {
+      setSectionCollapsed(section, !section.classList.contains('is-collapsed'));
+    });
+
+    head.innerHTML = '';
+    head.appendChild(main);
+    head.appendChild(toggle);
+  });
+
+  sections.forEach((section, index) => {
+    setSectionCollapsed(section, index > 0);
+  });
+
+  const expandAll = document.getElementById('expand-all-sections');
+  if (expandAll) {
+    expandAll.addEventListener('click', () => {
+      sections.forEach((section) => setSectionCollapsed(section, false));
+    });
+  }
+
+  const collapseAll = document.getElementById('collapse-all-sections');
+  if (collapseAll) {
+    collapseAll.addEventListener('click', () => {
+      sections.forEach((section) => setSectionCollapsed(section, true));
+    });
+  }
+}
+
 function fillWordsForm() {
   document.querySelectorAll('#words-card [data-field], #colors-card [data-field], #calendar-card [data-field], #vendors-card [data-field]').forEach((el) => {
     const value = resolvePath(content, el.getAttribute('data-field'));
@@ -278,6 +339,8 @@ document.getElementById('export-csv').addEventListener('click', () => {
 });
 
 async function init() {
+  setupCollapsibleSections();
+
   if (live && live.canUseLiveApi()) {
     try {
       await live.loadLiveSiteData();

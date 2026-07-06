@@ -73,9 +73,11 @@
     <a href="#site-colors">Colors</a>
     <a href="#calendar-vendors">Calendar & vendors</a>
     <a href="#beer-list">Beer list</a>
+    <button class="jumpnav-button" id="expand-all-sections" type="button">Expand all</button>
+    <button class="jumpnav-button" id="collapse-all-sections" type="button">Collapse all</button>
   </nav>
 
-  <section class="opt-card" id="site-story">
+  <section class="opt-card" id="site-story" data-collapsible="true">
     <div class="section-head">
       <div>
         <p class="section-kicker">Words</p>
@@ -84,6 +86,7 @@
       <p class="section-note">These fields control the main language people see when they land on the site.</p>
     </div>
 
+    <div class="section-body">
     <label>Header tagline
       <input type="text" data-field="hero.eyebrow" placeholder="Sharp Park · Pacifica, CA">
     </label>
@@ -152,9 +155,10 @@
       <a href="#top">Back to top</a>
       <a href="#site-colors">Next: Colors</a>
     </div>
+    </div>
   </section>
 
-  <section class="opt-card" id="site-colors">
+  <section class="opt-card" id="site-colors" data-collapsible="true">
     <div class="section-head">
       <div>
         <p class="section-kicker">Brand</p>
@@ -163,6 +167,7 @@
       <p class="section-note">These control the main look and feel without changing the layout.</p>
     </div>
 
+    <div class="section-body">
     <label class="color-row">Main blue
       <input type="color" data-field="colors.oceanDeep">
     </label>
@@ -181,9 +186,10 @@
       <a href="#top">Back to top</a>
       <a href="#calendar-vendors">Next: Calendar & vendors</a>
     </div>
+    </div>
   </section>
 
-  <section class="opt-card" id="calendar-vendors">
+  <section class="opt-card" id="calendar-vendors" data-collapsible="true">
     <div class="section-head">
       <div>
         <p class="section-kicker">Live sections</p>
@@ -192,6 +198,7 @@
       <p class="section-note">Use this area to control what feels live on the site and keep it truthful.</p>
     </div>
 
+    <div class="section-body">
     <label>Google Calendar embed link
       <input type="url" data-field="calendar.embedUrl" placeholder="https://calendar.google.com/calendar/embed?src=...">
     </label>
@@ -237,9 +244,10 @@
       <a href="#top">Back to top</a>
       <a href="#beer-list">Next: Beer list</a>
     </div>
+    </div>
   </section>
 
-  <section class="opt-card" id="beer-list">
+  <section class="opt-card" id="beer-list" data-collapsible="true">
     <div class="section-head">
       <div>
         <p class="section-kicker">Daily operations</p>
@@ -248,6 +256,7 @@
       <p class="section-note">This same list powers the website and the menu page, so one update changes both.</p>
     </div>
 
+    <div class="section-body">
     <div class="beer-table" id="beer-table">
       <div class="beer-head">
         <span>On</span><span>Beer</span><span>Brewery</span><span>Style</span><span>ABV%</span><span></span>
@@ -264,6 +273,7 @@
     <div class="section-footer-nav">
       <a href="#top">Back to top</a>
       <a href="#site-story">Back to site story</a>
+    </div>
     </div>
   </section>
 
