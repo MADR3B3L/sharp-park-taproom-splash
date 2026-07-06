@@ -10,6 +10,9 @@
 function pickFeaturedVendor() {
   const vendors = window.SITE_CONTENT && window.SITE_CONTENT.vendors;
   if (!vendors || !Array.isArray(vendors.partners)) return null;
+  if (vendors.bubbleCurrentVendor && vendors.bubbleCurrentVendor.name) {
+    return vendors.bubbleCurrentVendor;
+  }
   const active = vendors.partners.filter((v) => v.active !== 'no' && v.name);
   if (!active.length) return null;
   return seededShuffle(active, new Date().toDateString())[0];

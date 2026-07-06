@@ -47,7 +47,28 @@
     </article>
   </section>
 
+  <section class="opt-card" id="live-publish">
+    <div class="section-head">
+      <div>
+        <p class="section-kicker">Publishing</p>
+        <h2>Live dashboard access</h2>
+      </div>
+      <p class="section-note">When this dashboard has an owner access code, Save writes straight to the hosted site instead of downloading replacement files.</p>
+    </div>
+
+    <label>Owner access code
+      <input type="password" id="owner-access-code" placeholder="Enter the private publish code">
+    </label>
+    <div class="save-row">
+      <button class="save-btn" id="save-access-code">Save access code</button>
+      <button class="link-btn" id="clear-access-code" type="button">Clear code</button>
+      <span class="save-status" id="access-code-status"></span>
+    </div>
+    <p class="opt-hint" id="live-mode-status">Live publishing not configured yet. File-save fallback still works.</p>
+  </section>
+
   <nav class="opt-jumpnav" aria-label="Dashboard sections">
+    <a href="#live-publish">Live publish</a>
     <a href="#site-story">Site story</a>
     <a href="#site-colors">Colors</a>
     <a href="#calendar-vendors">Calendar & vendors</a>
@@ -181,6 +202,15 @@
       <input type="text" data-field="vendors.bubbleNote" placeholder="featured today">
     </label>
 
+    <div class="line-group">
+      <label>Bubble vendor name
+        <input type="text" data-field="vendors.bubbleCurrentVendor.name" placeholder="Lobo">
+      </label>
+      <label>Bubble vendor cuisine
+        <input type="text" data-field="vendors.bubbleCurrentVendor.cuisine" placeholder="Optional short note">
+      </label>
+    </div>
+
     <p class="opt-hint">If the bubble is not fully truthful yet, turn it off here. Vendor chips can still stay on the homepage.</p>
 
     <div class="beer-table" id="vendor-table">
@@ -235,8 +265,10 @@
 
 </main>
 
+<script src="assets/site-config.js"></script>
 <script src="assets/content-data.js"></script>
 <script src="assets/taps-data.js"></script>
+<script src="assets/live-data.js"></script>
 <script src="site-options.js"></script>
 </body>
 </html>

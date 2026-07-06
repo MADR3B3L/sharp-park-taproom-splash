@@ -3,6 +3,8 @@ Thumbs.db
 
 # Local editor / tooling state
 .claude/
+.wrangler/
+node_modules/
 
 # OS / temp
 *.swp

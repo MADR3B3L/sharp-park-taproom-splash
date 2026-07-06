@@ -19,6 +19,12 @@ window.SITE_CONTENT = {
     "spotlightCount": 3,
     "bubbleEnabled": true,
     "bubbleNote": "featured today",
+    "bubbleCurrentVendor": {
+      "name": "Lobo",
+      "cuisine": "",
+      "photoUrl": "",
+      "active": "yes"
+    },
     "partners": [
       { "name": "Chido's Pizza", "cuisine": "Pizza", "photoUrl": "", "active": "yes" },
       { "name": "Mezclá Eats", "cuisine": "", "photoUrl": "", "active": "yes" },

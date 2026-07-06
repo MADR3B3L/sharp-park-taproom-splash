@@ -8,6 +8,7 @@ This project is intentionally simple:
 - no framework build step
 - GitHub Pages friendly
 - editable content separated into data files
+- Cloudflare Pages friendly, including live owner publishing
 
 ## What is here
 
@@ -23,6 +24,10 @@ This project is intentionally simple:
   Editable tap list source used by the site.
 - `site-options.html`
   No-code editing surface for content and tap data.
+- `functions/api/*`
+  Same-origin live API for the hosted dashboard (`/api/site-data`, `/api/content`, `/api/taps`).
+- `wrangler.jsonc`
+  Cloudflare Pages config with the KV binding used by the live dashboard.
 
 ## Local preview
 
@@ -38,6 +43,16 @@ Then open:
 
 - `http://localhost:8080/`
 - `http://localhost:8080/site-options.html`
+
+## Hosted URLs
+
+- Public site: `https://sharppark-taproom.pages.dev/`
+- Hosted owner dashboard: `https://sharppark-taproom.pages.dev/site-options`
+- Menu page: `https://sharppark-taproom.pages.dev/menu`
+
+The hosted dashboard can publish live edits when the browser has the owner
+access code stored locally. Without that code, the same page still falls back
+to file-save/download mode.
 
 ## GitHub Pages
 
@@ -68,5 +83,7 @@ Or through:
 ## Notes
 
 - The site is already usable as a static public splash site.
+- The floating homepage bubble is currently forced to `Lobo` via
+  `vendors.bubbleCurrentVendor` so the live surface stays truthful.
 - Mobile is partially responsive now, but another polish pass is still worth
   doing before calling it fully tuned for phone-first traffic.

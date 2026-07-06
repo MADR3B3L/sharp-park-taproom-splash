@@ -79,6 +79,37 @@ function downloadBlob(filename, text) {
 let content = {};
 let beerRows = [];
 let vendorRows = [];
+const live = window.SharpParkLiveData;
+
+function setStatus(el, message) {
+  if (el) el.textContent = message;
+}
+
+function updateLiveModeStatus(message) {
+  setStatus(document.getElementById('live-mode-status'), message);
+}
+
+function getOwnerAccessCode() {
+  const input = document.getElementById('owner-access-code');
+  return input ? input.value.trim() : '';
+}
+
+function setOwnerAccessCode(value) {
+  const input = document.getElementById('owner-access-code');
+  if (input) input.value = value || '';
+}
+
+function refreshLiveModeStatus() {
+  if (!live || !live.canUseLiveApi()) {
+    updateLiveModeStatus('Live publishing not configured yet. File-save fallback still works.');
+    return;
+  }
+  if (live.getStoredAdminKey()) {
+    updateLiveModeStatus(`Live publishing is connected to ${live.getApiBase()}. Save buttons will update the hosted site.`);
+    return;
+  }
+  updateLiveModeStatus(`Live API found at ${live.getApiBase()}, but this browser still needs the owner access code.`);
+}
 
 function fillWordsForm() {
   document.querySelectorAll('#words-card [data-field], #colors-card [data-field], #calendar-card [data-field], #vendors-card [data-field]').forEach((el) => {
@@ -176,29 +207,68 @@ document.getElementById('add-beer').addEventListener('click', () => {
   renderBeerRows();
 });
 
+document.getElementById('save-access-code').addEventListener('click', () => {
+  if (!live) return;
+  const code = getOwnerAccessCode();
+  live.setStoredAdminKey(code);
+  setStatus(document.getElementById('access-code-status'), code ? 'Saved for this browser.' : 'Cleared.');
+  refreshLiveModeStatus();
+});
+
+document.getElementById('clear-access-code').addEventListener('click', () => {
+  if (!live) return;
+  setOwnerAccessCode('');
+  live.setStoredAdminKey('');
+  setStatus(document.getElementById('access-code-status'), 'Cleared.');
+  refreshLiveModeStatus();
+});
+
 document.querySelectorAll('[data-save]').forEach((btn) => {
   btn.addEventListener('click', async () => {
     const which = btn.getAttribute('data-save');
     const statusEl = btn.parentElement.querySelector('.save-status');
     statusEl.textContent = 'Saving…';
-    let result;
-    if (which === 'words') {
-      readWordsForm();
-      setPath(content, 'vendors.partners', vendorRows);
-      const js = `window.SITE_CONTENT = ${JSON.stringify(content, null, 2)};\n`;
-      result = await saveFile('content-data.js', js);
-    } else {
+    try {
+      const useLive = live && live.canUseLiveApi() && live.getStoredAdminKey();
+      if (which === 'words') {
+        readWordsForm();
+        setPath(content, 'vendors.partners', vendorRows);
+        if (useLive) {
+          await live.saveLiveContent(content, live.getStoredAdminKey());
+          statusEl.textContent = 'Published live ✓ Refresh the live site to confirm the change.';
+          return;
+        }
+        const js = `window.SITE_CONTENT = ${JSON.stringify(content, null, 2)};\n`;
+        const result = await saveFile('content-data.js', js);
+        statusEl.textContent = {
+          saved: 'Saved ✓ Refresh the live site tab to confirm the change.',
+          downloaded: 'Downloaded ✓ Replace the old file with this one, then refresh the live site.',
+          cancelled: '',
+          error: 'Something went wrong — nothing was overwritten.',
+        }[result];
+        return;
+      }
+
       renumberTaps();
       const csv = toCsv(beerRows);
+      if (useLive) {
+        await live.saveLiveTapsCsv(csv, live.getStoredAdminKey());
+        statusEl.textContent = 'Published live ✓ Website and menu now share the updated tap list.';
+        return;
+      }
       const js = `window.TAPS_CSV_LOCAL = \`${escapeForTemplateLiteral(csv)}\`;\n`;
-      result = await saveFile('taps-data.js', js);
+      const result = await saveFile('taps-data.js', js);
+      statusEl.textContent = {
+        saved: 'Saved ✓ Refresh the live site tab to confirm the change.',
+        downloaded: 'Downloaded ✓ Replace the old file with this one, then refresh the live site.',
+        cancelled: '',
+        error: 'Something went wrong — nothing was overwritten.',
+      }[result];
+    } catch (error) {
+      statusEl.textContent = error && error.message
+        ? `Couldn’t publish live: ${error.message}`
+        : 'Something went wrong — nothing was overwritten.';
     }
-    statusEl.textContent = {
-      saved: 'Saved ✓ Refresh the live site tab to confirm the change.',
-      downloaded: 'Downloaded ✓ Replace the old file with this one, then refresh the live site.',
-      cancelled: '',
-      error: 'Something went wrong — nothing was overwritten.',
-    }[result];
   });
 });
 
@@ -207,7 +277,18 @@ document.getElementById('export-csv').addEventListener('click', () => {
   downloadBlob('taps.csv', toCsv(beerRows));
 });
 
-function init() {
+async function init() {
+  if (live && live.canUseLiveApi()) {
+    try {
+      await live.loadLiveSiteData();
+    } catch (error) {
+      console.warn('Live dashboard bootstrap fell back to bundled files.', error);
+    }
+  }
+
+  setOwnerAccessCode(live ? live.getStoredAdminKey() : '');
+  refreshLiveModeStatus();
+
   content = window.SITE_CONTENT || {};
   fillWordsForm();
 

@@ -1,0 +1,11 @@
+{
+  "name": "sharppark-taproom",
+  "pages_build_output_dir": ".",
+  "compatibility_date": "2026-07-05",
+  "kv_namespaces": [
+    {
+      "binding": "SHARP_PARK_DATA",
+      "id": "ad91ce8d2e094bd9932531711fa986d0"
+    }
+  ]
+}

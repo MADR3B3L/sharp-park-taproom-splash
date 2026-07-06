@@ -7,6 +7,20 @@ three render the site identically, no console errors). Git-backed (`git log`
 in this folder has the before/after commits). Rest of this doc is the original
 design brief, kept for reference.
 
+**UPDATE (2026-07-05):** The dashboard now has two modes:
+- local file mode for double-click / offline editing
+- live hosted mode on Cloudflare Pages, backed by KV via `/api/site-data`,
+  `/api/content`, and `/api/taps`
+
+Hosted surface:
+- site: `https://sharppark-taproom.pages.dev/`
+- dashboard: `https://sharppark-taproom.pages.dev/site-options`
+- menu: `https://sharppark-taproom.pages.dev/menu`
+
+The live dashboard stores the owner access code in browser local storage, then
+publishes directly to the hosted data store instead of downloading replacement
+files.
+
 Goal: leave Alex (non-developer) able to change words, hours, colors, and the
 beer list himself — no code, no LLM, never assed-out. Turn the finished site
 from a frozen artifact into a **living content-map he owns.**
