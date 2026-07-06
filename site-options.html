@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Site Options — Sharp Park Taproom</title>
+<link rel="icon" type="image/png" href="assets/favicon-official.png">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site-options.css">
+</head>
+<body>
+
+<header class="opt-header">
+  <img src="assets/logo/sharp-park-taproom-logo-official.png" alt="" class="opt-logo">
+  <div>
+    <h1>Site Options</h1>
+    <p>Change the words, colors, and beer list here — no code needed. Nothing saves until you click a Save button.</p>
+  </div>
+</header>
+
+<main class="opt-main">
+
+  <section class="opt-card" id="words-card">
+    <h2>Words</h2>
+
+    <label>Header tagline (top of homepage)
+      <input type="text" data-field="hero.eyebrow">
+    </label>
+
+    <label>Big headline — 3 short lines
+      <div class="line-group">
+        <input type="text" data-field="hero.title.0" placeholder="Line 1">
+        <input type="text" data-field="hero.title.1" placeholder="Line 2">
+        <input type="text" data-field="hero.title.2" placeholder="Line 3">
+      </div>
+    </label>
+
+    <label>Headline subtext
+      <textarea data-field="hero.sub" rows="3"></textarea>
+    </label>
+
+    <label>"Our story" paragraph
+      <textarea data-field="about.body" rows="5"></textarea>
+    </label>
+
+    <label>Food truck operational note (under "Usual weekly rhythm")
+      <textarea data-field="today.operationalNote" rows="2"></textarea>
+    </label>
+
+    <label>"Food vendors & trucks" coming-soon message
+      <textarea data-field="vendors.lede" rows="3"></textarea>
+    </label>
+
+    <h3>The four stat cards</h3>
+    <div class="figures-grid">
+      <div class="figure-row"><input type="text" data-field="figures.0.value" placeholder="Value"><input type="text" data-field="figures.0.label" placeholder="Label"></div>
+      <div class="figure-row"><input type="text" data-field="figures.1.value" placeholder="Value"><input type="text" data-field="figures.1.label" placeholder="Label"></div>
+      <div class="figure-row"><input type="text" data-field="figures.2.value" placeholder="Value"><input type="text" data-field="figures.2.label" placeholder="Label"></div>
+      <div class="figure-row"><input type="text" data-field="figures.3.value" placeholder="Value"><input type="text" data-field="figures.3.label" placeholder="Label"></div>
+    </div>
+
+    <label>Address — 2 lines
+      <div class="line-group">
+        <input type="text" data-field="visit.address.0" placeholder="Street">
+        <input type="text" data-field="visit.address.1" placeholder="City, State ZIP">
+      </div>
+    </label>
+
+    <h3>Hours</h3>
+    <div class="hours-grid">
+      <div class="hours-row"><input type="text" data-field="hours.0.day"><input type="text" data-field="hours.0.time"></div>
+      <div class="hours-row"><input type="text" data-field="hours.1.day"><input type="text" data-field="hours.1.time"></div>
+      <div class="hours-row"><input type="text" data-field="hours.2.day"><input type="text" data-field="hours.2.time"></div>
+      <div class="hours-row"><input type="text" data-field="hours.3.day"><input type="text" data-field="hours.3.time"></div>
+      <div class="hours-row"><input type="text" data-field="hours.4.day"><input type="text" data-field="hours.4.time"></div>
+    </div>
+
+    <label>Instagram link
+      <input type="url" data-field="social.instagram">
+    </label>
+
+    <div class="save-row">
+      <button class="save-btn" data-save="words">Save words &amp; colors</button>
+      <span class="save-status" id="words-status"></span>
+    </div>
+  </section>
+
+  <section class="opt-card" id="colors-card">
+    <h2>Colors</h2>
+    <p class="opt-hint">These three are the site's brand colors. Everything else (backgrounds, text) stays as designed.</p>
+    <label class="color-row">Main blue (header links, headings)
+      <input type="color" data-field="colors.oceanDeep">
+    </label>
+    <label class="color-row">Yellow (buttons, tap numbers)
+      <input type="color" data-field="colors.yellow">
+    </label>
+    <label class="color-row">Wood brown (accents)
+      <input type="color" data-field="colors.wood">
+    </label>
+  </section>
+
+  <section class="opt-card" id="calendar-card">
+    <h2>Food truck calendar</h2>
+    <p class="opt-hint">Paste your Google Calendar's embed link here and it'll show live on the "Today's Food" section. Leave blank to keep the placeholder. In Google Calendar: Settings → pick your calendar → "Integrate calendar" → copy the "Embed code" and paste just the URL inside its <code>src="..."</code> part.</p>
+    <label>Calendar embed link
+      <input type="url" data-field="calendar.embedUrl" placeholder="https://calendar.google.com/calendar/embed?src=...">
+    </label>
+    <div class="save-row">
+      <button class="save-btn" data-save="words">Save words, colors &amp; calendar</button>
+      <span class="save-status" id="words-status-2"></span>
+    </div>
+  </section>
+
+  <section class="opt-card" id="vendors-card">
+    <h2>Featured vendors</h2>
+    <p class="opt-hint">A random 3 of these show as chips on the homepage, and it changes once a day — not every refresh. Uncheck "On" to hide one without deleting it. Photo is optional for now (paste a link once you have photos hosted somewhere); until then it just shows the vendor's initial.</p>
+    <div class="beer-table" id="vendor-table">
+      <div class="beer-head vendor-head">
+        <span>On</span><span>Name</span><span>Cuisine</span><span>Photo URL</span><span></span>
+      </div>
+      <div id="vendor-rows"></div>
+    </div>
+    <button class="add-btn" id="add-vendor">+ Add a vendor</button>
+    <label style="margin-top:14px">How many to show at once
+      <input type="number" min="1" max="10" data-field="vendors.spotlightCount" style="width:60px">
+    </label>
+    <div class="save-row">
+      <button class="save-btn" data-save="words">Save vendors</button>
+      <span class="save-status"></span>
+    </div>
+  </section>
+
+  <section class="opt-card" id="beers-card">
+    <h2>Beer list</h2>
+    <p class="opt-hint">This is the same list that shows on the website and prints as the bar menu. Uncheck "On" to pull a beer without deleting it.</p>
+    <div class="beer-table" id="beer-table">
+      <div class="beer-head">
+        <span>On</span><span>Beer</span><span>Brewery</span><span>Style</span><span>ABV%</span><span></span>
+      </div>
+      <div id="beer-rows"></div>
+    </div>
+    <button class="add-btn" id="add-beer">+ Add a tap</button>
+    <div class="save-row">
+      <button class="save-btn" data-save="beers">Save beer list</button>
+      <button class="link-btn" id="export-csv">Export as .csv (for Google Sheets later)</button>
+      <span class="save-status" id="beers-status"></span>
+    </div>
+  </section>
+
+</main>
+
+<script src="assets/content-data.js"></script>
+<script src="assets/taps-data.js"></script>
+<script src="site-options.js"></script>
+</body>
+</html>

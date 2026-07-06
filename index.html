@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sharp Park Taproom — Pacifica, CA</title>
+<meta name="description" content="Sharp Park Taproom: nine rotating local taps and daily food pop-ups in Sharp Park, Pacifica. A community taproom by the beach.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" type="image/png" href="assets/favicon-official.png">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a href="#top" class="logo">
+      <img src="assets/logo/sharp-park-taproom-logo-official.png" alt="Sharp Park Taproom" class="logo-mark">
+      Sharp Park <span>Taproom</span>
+    </a>
+    <nav class="main-nav">
+      <a href="#today">Today's Food</a>
+      <a href="#taps">Taps</a>
+      <a href="#about">About</a>
+      <a href="#vendors">Vendors</a>
+      <a href="#visit">Visit</a>
+    </nav>
+    <!-- Facebook: add a link/button here once Alex confirms a page (may currently be a personal profile) -->
+    <a class="btn btn-small" data-edit="social.instagram" data-edit-attr="href" href="https://www.instagram.com/sharpparktaproom/" target="_blank" rel="noopener">Instagram</a>
+  </div>
+</header>
+
+<section id="top" class="hero">
+  <div class="wrap hero-inner">
+    <p class="eyebrow" data-edit="hero.eyebrow">Sharp Park &middot; Pacifica, CA</p>
+    <h1 data-edit="hero.title">Craft beer.<br>Local food.<br>Community.</h1>
+    <p class="hero-sub" data-edit="hero.sub">9+ rotating taps of local craft beer and a different food pop-up almost every day, poured over a 17-foot ash wood bar two blocks from the water.</p>
+    <div class="hero-actions">
+      <a href="#today" class="btn btn-primary">See what's popping up today</a>
+      <a href="#taps" class="btn btn-ghost">Check the taps</a>
+    </div>
+  </div>
+  <img src="assets/logo/sharp-park-taproom-logo-official.png" alt="" class="hero-logo" aria-hidden="true">
+  <div class="hero-wave" aria-hidden="true">
+    <svg viewBox="0 0 1440 120" preserveAspectRatio="none"><path d="M0,64 C240,120 480,0 720,32 C960,64 1200,120 1440,64 L1440,120 L0,120 Z"></path></svg>
+  </div>
+</section>
+
+<section id="today" class="section today-section">
+  <div class="wrap">
+    <p class="eyebrow">Live &middot; updates as it's scheduled</p>
+    <h2>What's popping up today</h2>
+    <p class="section-lede">We team up with a rotating lineup of local food pop-ups Thursday through Sunday, typically running from open until close (or until they sell out — get there early for the good stuff). This calendar is kept live by the taproom — check back for the day's vendor before you head over.</p>
+
+    <div class="today-grid">
+      <div class="today-card">
+        <h3>Pop-up calendar</h3>
+        <div class="calendar-frame-placeholder" id="calendar-slot">
+          <span>Google Calendar embed goes here</span>
+        </div>
+      </div>
+
+      <div class="today-card">
+        <h3>Usual weekly rhythm</h3>
+        <ul class="schedule-list">
+          <li><span>Thu</span>Pop-up &middot; rotating</li>
+          <li><span>Fri</span>Pop-up &middot; rotating</li>
+          <li><span>Sat</span>Pop-up &middot; rotating</li>
+          <li><span>Sun</span>Pop-up &middot; rotating</li>
+        </ul>
+        <p class="fine-print" data-edit="today.operationalNote">Pop-ups generally run open-to-close or until sold out.</p>
+        <p class="fine-print vendor-spotlight-label">Recent &amp; regular partners</p>
+        <div class="vendor-spotlight" id="vendor-spotlight"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="taps" class="section taps-section">
+  <div class="chalk-wave chalk-wave-top" aria-hidden="true">
+    <svg viewBox="0 0 1440 80" preserveAspectRatio="none"><path d="M0,40 C240,80 480,0 720,24 C960,48 1200,80 1440,40 L1440,0 L0,0 Z"></path></svg>
+  </div>
+  <div class="wrap">
+    <p class="eyebrow">9+ taps &middot; changes daily</p>
+    <h2>On tap</h2>
+    <p class="section-lede">A rotating lineup of local lines — 9+ at any given time — almost all from breweries within twenty miles: Pacifica-based Rockaway, plus Urban Roots, Harmonic, Hop Dogma, and friends.</p>
+    <div class="tap-grid" id="tap-grid">
+      <p class="fine-print">Loading taps&hellip;</p>
+    </div>
+    <p class="fine-print center"><a href="menu.html">This same list prints as the bar menu</a> — one update, both places.</p>
+  </div>
+  <div class="chalk-wave chalk-wave-bottom" aria-hidden="true">
+    <svg viewBox="0 0 1440 80" preserveAspectRatio="none"><path d="M0,40 C240,0 480,80 720,56 C960,32 1200,0 1440,40 L1440,80 L0,80 Z"></path></svg>
+  </div>
+</section>
+
+<section id="about" class="section about-section">
+  <div class="wrap about-inner">
+    <div class="about-copy">
+      <img src="assets/logo/sharp-park-taproom-badge-circular.png" alt="Sharp Park Taproom badge" class="about-badge">
+      <p class="eyebrow">Our story</p>
+      <h2>A neighborhood spot, built by the neighborhood</h2>
+      <p data-edit="about.body">Sharp Park Taproom was opened by Pacifica locals Kris Romo and Alex Englund with one goal: skip the big distributors and pour what local breweries are actually making, in a room built for hanging out. The mural behind the bar is hand-painted by Kris. The bar itself is 17 feet of ash wood. The dogs are welcome on the patio, the board games are out, and the game's usually on.</p>
+    </div>
+    <div class="about-figures">
+      <div class="figure-card"><strong data-edit="figures.0.value">17 ft</strong><span data-edit="figures.0.label">ash wood bar</span></div>
+      <div class="figure-card"><strong data-edit="figures.1.value">9+</strong><span data-edit="figures.1.label">rotating taps</span></div>
+      <div class="figure-card"><strong data-edit="figures.2.value">Thu–Sun</strong><span data-edit="figures.2.label">food pop-ups</span></div>
+      <div class="figure-card"><strong data-edit="figures.3.value">Dog</strong><span data-edit="figures.3.label">friendly patio</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="vendors" class="section vendors-section">
+  <div class="wrap vendors-inner">
+    <p class="eyebrow">Coming soon</p>
+    <h2>Food vendors &amp; trucks</h2>
+    <p class="section-lede" data-edit="vendors.lede">Want to pop up at Sharp Park Taproom? Soon you'll be able to request an open date right from here — it'll drop straight onto our calendar for approval.</p>
+    <button class="btn btn-primary" disabled>Request a date — coming soon</button>
+  </div>
+</section>
+
+<section id="visit" class="section visit-section">
+  <div class="wrap visit-inner">
+    <div>
+      <p class="eyebrow">Visit</p>
+      <h2>Find us in Sharp Park</h2>
+      <p class="visit-address" data-edit="visit.address">100 Santa Rosa Ave, Suite 3<br>Pacifica, CA 94044</p>
+      <ul class="hours-list">
+        <li><span class="hours-day" data-edit="hours.0.day">Mon</span><span class="hours-time" data-edit="hours.0.time">Closed</span></li>
+        <li><span class="hours-day" data-edit="hours.1.day">Tue–Thu</span><span class="hours-time" data-edit="hours.1.time">4–9pm</span></li>
+        <li><span class="hours-day" data-edit="hours.2.day">Fri</span><span class="hours-time" data-edit="hours.2.time">3–10pm</span></li>
+        <li><span class="hours-day" data-edit="hours.3.day">Sat</span><span class="hours-time" data-edit="hours.3.time">12–10pm</span></li>
+        <li><span class="hours-day" data-edit="hours.4.day">Sun</span><span class="hours-time" data-edit="hours.4.time">12–9pm</span></li>
+      </ul>
+    </div>
+    <div class="map-embed">
+      <iframe
+        src="https://www.google.com/maps/embed?origin=mfe&pb=!1m2!2m1!1s100+Santa+Rosa+Ave+Suite+3,+Pacifica,+CA+94044"
+        width="100%" height="260" style="border:0;" loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="Map to Sharp Park Taproom"></iframe>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <span class="logo footer-logo">Sharp Park <span>Taproom</span></span>
+    <div class="footer-links">
+      <a data-edit="social.instagram" data-edit-attr="href" href="https://www.instagram.com/sharpparktaproom/" target="_blank" rel="noopener">Instagram</a>
+      <a href="#visit">Visit</a>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/content-data.js"></script>
+<script src="assets/content.js"></script>
+<script>applyContent();</script>
+<script src="assets/taps-data.js"></script>
+<script src="assets/taps.js"></script>
+<script>renderTapGrid();</script>
+</body>
+</html>

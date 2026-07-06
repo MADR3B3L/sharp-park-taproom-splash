@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Today's Menu — Sharp Park Taproom</title>
+<link rel="icon" type="image/png" href="assets/favicon-official.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="menu.css">
+</head>
+<body class="menu-page">
+
+<div class="menu-toolbar no-print">
+  <a href="index.html">&larr; Back to site</a>
+  <button onclick="window.print()">Print this menu</button>
+</div>
+
+<main class="menu-sheet">
+  <header class="menu-head">
+    <img src="assets/logo/sharp-park-taproom-logo-official.png" alt="" class="menu-logo">
+    <div>
+      <h1>Sharp Park Taproom</h1>
+      <p>100 Santa Rosa Ave, Suite 3 &middot; Pacifica, CA</p>
+    </div>
+  </header>
+
+  <p class="menu-updated">Taps as of <span id="menu-updated">&hellip;</span></p>
+
+  <h2>On Tap</h2>
+  <ul class="menu-tap-list" id="menu-tap-list">
+    <li>Loading&hellip;</li>
+  </ul>
+
+  <p class="menu-note">Ask your bartender what's pouring if a tap just kicked &mdash; this list updates the moment it's changed behind the bar.</p>
+</main>
+
+<script src="assets/taps-data.js"></script>
+<script src="assets/taps.js"></script>
+<script>renderMenuList();</script>
+</body>
+</html>
