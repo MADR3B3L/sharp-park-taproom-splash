@@ -109,6 +109,21 @@
   display: inline-block; margin-top: 14px; padding: 10px 16px; border-radius: 999px;
   background: var(--yellow); color: var(--black); font-weight: 700; font-size: 13px; text-decoration: none;
 }
+.sp-card .sp-hide {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 12px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--ocean-deep);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: underline;
+  cursor: pointer;
+}
 .sp-card .sp-x { position: absolute; top: 12px; right: 14px; font-size: 18px; color: #b9c2c7; cursor: pointer; }
 
 @media (max-width: 640px) {

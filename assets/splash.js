@@ -19,11 +19,14 @@ function pickFeaturedVendor() {
 }
 
 function initSplash() {
+  const HIDE_KEY = 'sharp-park-bubble-hidden-until';
+  const HIDE_MS = 2 * 60 * 1000;
   const cover = document.getElementById('cover');
   const bubble = document.getElementById('sp-bubble');
   const card = document.getElementById('sp-card');
   const closeX = document.getElementById('sp-close');
   const cardLink = card ? card.querySelector('.sp-go') : null;
+  const hideButton = document.getElementById('sp-hide-temporary');
   if (!cover || !bubble || !card) return;
 
   const vendors = window.SITE_CONTENT && window.SITE_CONTENT.vendors;
@@ -47,19 +50,63 @@ function initSplash() {
 
   // add ?slow=1 to the URL to hold the splash longer while eyeballing it
   const HOLD_MS = new URLSearchParams(location.search).get('slow') ? 8000 : 2000;
+  let revealTimer = null;
+
+  function getHiddenUntil() {
+    try {
+      return Number(sessionStorage.getItem(HIDE_KEY) || 0);
+    } catch (error) {
+      return 0;
+    }
+  }
+
+  function setHiddenUntil(until) {
+    try {
+      if (until) {
+        sessionStorage.setItem(HIDE_KEY, String(until));
+      } else {
+        sessionStorage.removeItem(HIDE_KEY);
+      }
+    } catch (error) {}
+  }
+
+  function isTemporarilyHidden() {
+    return getHiddenUntil() > Date.now();
+  }
 
   let released = false;
+  function releaseBubble() {
+    clearTimeout(revealTimer);
+    if (!bubbleEnabled || !vendor || isTemporarilyHidden()) return;
+    setHiddenUntil(0);
+    x = (window.innerWidth - bubble.offsetWidth) / 2;
+    y = 130;
+    bubble.style.left = x + 'px';
+    bubble.style.top = y + 'px';
+    bubble.style.display = 'flex';
+    bubble.classList.add('in');
+    released = true;
+  }
+
+  function scheduleRelease(delayMs) {
+    clearTimeout(revealTimer);
+    revealTimer = setTimeout(() => {
+      releaseBubble();
+    }, delayMs);
+  }
+
   setTimeout(() => {
       cover.classList.add('disperse');
       setTimeout(() => {
         cover.style.display = 'none';
         if (!bubbleEnabled || !vendor) return;
-        x = (window.innerWidth - bubble.offsetWidth) / 2;
-        y = 130;
-        bubble.style.left = x + 'px';
-      bubble.style.top = y + 'px';
-      bubble.classList.add('in');
-      released = true;
+        const hiddenUntil = getHiddenUntil();
+        if (hiddenUntil > Date.now()) {
+          bubble.style.display = 'none';
+          scheduleRelease(hiddenUntil - Date.now());
+          return;
+        }
+        releaseBubble();
     }, 1150);
   }, HOLD_MS);
 
@@ -135,6 +182,14 @@ function initSplash() {
     bubble.style.opacity = '1';
     wandering = true;
   }
+  function hideTemporarily() {
+    const until = Date.now() + HIDE_MS;
+    setHiddenUntil(until);
+    dismiss();
+    released = false;
+    bubble.style.display = 'none';
+    scheduleRelease(HIDE_MS);
+  }
   closeX.addEventListener('click', dismiss);
   card.addEventListener('click', (e) => { if (e.target === card) dismiss(); });
   bubble.addEventListener('mouseleave', () => { if (cardOpen) scheduleDismiss(); });
@@ -144,6 +199,11 @@ function initSplash() {
   if (cardLink) {
     cardLink.addEventListener('click', () => {
       dismiss();
+    });
+  }
+  if (hideButton) {
+    hideButton.addEventListener('click', () => {
+      hideTemporarily();
     });
   }
 }
