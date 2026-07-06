@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="assets/splash.css">
 <link rel="icon" type="image/png" href="assets/favicon-official.png">
 </head>
 <body>
@@ -155,11 +156,39 @@
   </div>
 </footer>
 
+<!-- splash cover: same headline as the hero, just the entrance -->
+<div class="cover" id="cover">
+  <img src="assets/logo/sharp-park-taproom-logo-official.png" alt="" class="cover-logo">
+  <p class="eyebrow">Sharp Park &middot; Pacifica, CA</p>
+  <h1>
+    <span class="line">Craft beer.</span>
+    <span class="line">Local food.</span>
+    <span class="line">Community.</span>
+  </h1>
+  <p class="sub">9+ rotating taps &middot; a different pop-up almost every day</p>
+</div>
+
+<!-- the living bubble: rides the whole site, shows today's featured vendor -->
+<div class="sp-bubble" id="sp-bubble">
+  <div class="sp-scoop"><img src="assets/logo/sharp-park-taproom-logo-official.png" alt=""></div>
+  <div class="sp-txt"><b id="sp-bubble-name">&nbsp;</b><small id="sp-bubble-note">&nbsp;</small></div>
+</div>
+
+<div class="sp-card" id="sp-card">
+  <span class="sp-x" id="sp-close">&times;</span>
+  <div class="sp-avatar"><img src="assets/logo/sharp-park-taproom-logo-official.png" alt=""></div>
+  <h3 id="sp-card-name">&nbsp;</h3>
+  <p id="sp-card-note">&nbsp;</p>
+  <a class="sp-go" href="#taps">See what's on tap &rarr;</a>
+</div>
+
 <script src="assets/content-data.js"></script>
 <script src="assets/content.js"></script>
 <script>applyContent();</script>
 <script src="assets/taps-data.js"></script>
 <script src="assets/taps.js"></script>
 <script>renderTapGrid();</script>
+<script src="assets/splash.js"></script>
+<script>initSplash();</script>
 </body>
 </html>
