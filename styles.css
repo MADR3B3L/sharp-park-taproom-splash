@@ -626,6 +626,8 @@ p { margin: 0 0 16px; }
   }
 
   .header-inner {
+    flex-wrap: wrap;
+    align-items: center;
     gap: 12px;
     padding-top: 12px;
     padding-bottom: 12px;
@@ -633,11 +635,15 @@ p { margin: 0 0 16px; }
 
   .header-socials {
     width: 100%;
+    justify-content: flex-start;
+    order: 3;
   }
 
   .logo {
     font-size: 17px;
     gap: 8px;
+    flex: 1 1 auto;
+    min-width: 0;
   }
 
   .logo-mark {
@@ -651,6 +657,7 @@ p { margin: 0 0 16px; }
 
   .btn-small {
     width: auto;
+    flex: 0 0 auto;
   }
 
   .hero {
