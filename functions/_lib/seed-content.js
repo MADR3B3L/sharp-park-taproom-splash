@@ -46,7 +46,8 @@ export const seedContent = {
     { day: 'Sun', time: '12–9pm' }
   ],
   social: {
-    instagram: 'https://www.instagram.com/sharpparktaproom/'
+    instagram: 'https://www.instagram.com/sharpparktaproom/',
+    facebook: ''
   },
   colors: {
     oceanDeep: '#2a8fb0',

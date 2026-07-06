@@ -83,6 +83,19 @@ function applyCalendar(calendar) {
   slot.innerHTML = `<iframe src="${escapeHtml(calendar.embedUrl)}" style="width:100%;height:400px;border:0;" loading="lazy"></iframe>`;
 }
 
+function applySocialLinks(social) {
+  document.querySelectorAll('[data-social-platform]').forEach((el) => {
+    const key = el.getAttribute('data-social-platform');
+    const value = social && social[key];
+    if (value) {
+      el.classList.remove('is-hidden');
+      el.setAttribute('href', value);
+    } else {
+      el.classList.add('is-hidden');
+    }
+  });
+}
+
 function applyContent() {
   const content = window.SITE_CONTENT;
   if (!content) return; // content-data.js didn't load -- HTML defaults stand as-is
@@ -97,5 +110,6 @@ function applyContent() {
 
   try { applyColors(content.colors); } catch (e) {}
   try { applyCalendar(content.calendar); } catch (e) {}
+  try { applySocialLinks(content.social); } catch (e) {}
   try { applyVendorSpotlight(content.vendors); } catch (e) {}
 }
